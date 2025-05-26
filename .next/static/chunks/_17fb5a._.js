@@ -1,4 +1,4 @@
-(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_377708._.js", {
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_17fb5a._.js", {
 
 "[project]/src/components/ui/Container.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -9,15 +9,33 @@ __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
-'use client';
 ;
-const Container = ({ children, className = '' })=>{
+const Container = ({ children, className = '', maxWidth = 'lg', padding = 'md' })=>{
+    const maxWidthClasses = {
+        sm: 'max-w-2xl',
+        md: 'max-w-4xl',
+        lg: 'max-w-6xl',
+        xl: 'max-w-7xl',
+        '2xl': 'max-w-screen-2xl',
+        full: 'max-w-full'
+    };
+    const paddingClasses = {
+        none: '',
+        sm: 'px-4 py-4',
+        md: 'px-4 sm:px-6 lg:px-8 py-6',
+        lg: 'px-6 sm:px-8 lg:px-12 py-8'
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`,
+        className: `
+      ${maxWidthClasses[maxWidth]} 
+      ${paddingClasses[padding]}
+      mx-auto w-full
+      ${className}
+    `,
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/ui/Container.tsx",
-        lineNumber: 12,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 };
@@ -29,7 +47,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
-"[project]/src/components/dashboard/HeroSection.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/components/ui/Button.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
@@ -40,146 +58,138 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 'use client';
 ;
-const HeroSection = ()=>{
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50",
+const Button = ({ children, variant = 'primary', size = 'md', onClick, disabled = false, loading = false, icon, className = '', type = 'button', fullWidth = false })=>{
+    const baseClasses = `
+    font-semibold rounded-2xl transition-all duration-300 
+    transform hover:-translate-y-1 active:translate-y-0
+    flex items-center justify-center gap-3 
+    shadow-lg hover:shadow-xl active:shadow-md
+    focus:outline-none focus:ring-4 focus:ring-opacity-50
+    disabled:opacity-50 disabled:cursor-not-allowed 
+    disabled:transform-none disabled:shadow-lg
+    relative overflow-hidden group
+  `;
+    const variants = {
+        primary: `
+      bg-gradient-to-r from-purple-600 to-pink-600 
+      text-white hover:from-purple-700 hover:to-pink-700
+      focus:ring-purple-300 shadow-purple-200
+    `,
+        secondary: `
+      bg-white text-purple-600 hover:bg-purple-50 
+      border-2 border-purple-600 hover:border-purple-700
+      focus:ring-purple-300 shadow-purple-100
+    `,
+        success: `
+      bg-gradient-to-r from-green-500 to-emerald-600 
+      text-white hover:from-green-600 hover:to-emerald-700
+      focus:ring-green-300 shadow-green-200
+    `,
+        danger: `
+      bg-gradient-to-r from-red-500 to-rose-600 
+      text-white hover:from-red-600 hover:to-rose-700
+      focus:ring-red-300 shadow-red-200
+    `,
+        warning: `
+      bg-gradient-to-r from-yellow-500 to-orange-500 
+      text-white hover:from-yellow-600 hover:to-orange-600
+      focus:ring-yellow-300 shadow-yellow-200
+    `,
+        ghost: `
+      bg-transparent text-gray-600 hover:bg-gray-100 
+      border border-gray-300 hover:border-gray-400
+      focus:ring-gray-300 shadow-gray-100
+    `
+    };
+    const sizes = {
+        sm: 'px-4 py-2 text-sm min-h-[2.5rem]',
+        md: 'px-6 py-3 text-base min-h-[3rem]',
+        lg: 'px-8 py-4 text-lg min-h-[3.5rem]',
+        xl: 'px-10 py-5 text-xl min-h-[4rem]'
+    };
+    const widthClass = fullWidth ? 'w-full' : '';
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+        type: type,
+        onClick: onClick,
+        disabled: disabled || loading,
+        className: `
+        ${baseClasses} 
+        ${variants[variant]} 
+        ${sizes[size]} 
+        ${widthClass}
+        ${className}
+      `,
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative overflow-hidden bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "relative max-w-7xl mx-auto px-6 py-16",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "text-center",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-4xl md:text-6xl font-bold text-white mb-4",
-                                children: "پنل مدیریت آرایشگاه آرایا"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                lineNumber: 12,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-xl text-purple-100 mb-8",
-                                children: "مدیریت هوشمند نوبت‌دهی و مشتریان"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                lineNumber: 15,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                        lineNumber: 11,
-                        columnNumber: 11
-                    }, this)
-                }, void 0, false, {
-                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                    lineNumber: 10,
-                    columnNumber: 9
-                }, this)
+                className: "absolute inset-0 -top-full bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:top-full transition-all duration-700"
             }, void 0, false, {
-                fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                lineNumber: 9,
+                fileName: "[project]/src/components/ui/Button.tsx",
+                lineNumber: 97,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "max-w-7xl mx-auto px-6 py-16",
+            loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "absolute inset-0 flex items-center justify-center",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "grid grid-cols-1 lg:grid-cols-2 gap-8",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-2xl shadow-lg p-8",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-2xl font-bold text-gray-800 mb-4",
-                                    children: "مدیریت مشتریان"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 28,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-gray-600 mb-6",
-                                    children: "افزودن و مدیریت اطلاعات مشتریان"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 29,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors",
-                                    children: "مشتری جدید"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 30,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                            lineNumber: 27,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-2xl shadow-lg p-8",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-2xl font-bold text-gray-800 mb-4",
-                                    children: "مدیریت نوبت‌ها"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 37,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-gray-600 mb-6",
-                                    children: "رزرو و مدیریت نوبت‌های روزانه"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 38,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors",
-                                    children: "نوبت جدید"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                                    lineNumber: 39,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                            lineNumber: 36,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                    lineNumber: 24,
-                    columnNumber: 9
+                    className: "w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ui/Button.tsx",
+                    lineNumber: 102,
+                    columnNumber: 11
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-                lineNumber: 23,
+                fileName: "[project]/src/components/ui/Button.tsx",
+                lineNumber: 101,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `flex items-center gap-3 ${loading ? 'opacity-0' : 'opacity-100'} transition-opacity`,
+                children: [
+                    icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-xl group-hover:scale-110 transition-transform duration-300",
+                        children: icon
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/ui/Button.tsx",
+                        lineNumber: 109,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "relative z-10",
+                        children: children
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/ui/Button.tsx",
+                        lineNumber: 113,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/ui/Button.tsx",
+                lineNumber: 107,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
-        fileName: "[project]/src/components/dashboard/HeroSection.tsx",
-        lineNumber: 7,
+        fileName: "[project]/src/components/ui/Button.tsx",
+        lineNumber: 84,
         columnNumber: 5
     }, this);
 };
-_c = HeroSection;
-const __TURBOPACK__default__export__ = HeroSection;
+_c = Button;
+const __TURBOPACK__default__export__ = Button;
 var _c;
-__turbopack_refresh__.register(_c, "HeroSection");
+__turbopack_refresh__.register(_c, "Button");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
+"[project]/src/components/dashboard/HeroSection.tsx [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
+{
+const e = new Error(`Could not parse module '[project]/src/components/dashboard/HeroSection.tsx'
+
+Unexpected token `div`. Expected jsx identifier`);
+e.code = 'MODULE_UNPARSEABLE';
+throw e;}}),
 "[project]/src/components/dashboard/StatsCards.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -1022,4 +1032,4 @@ if ("TURBOPACK compile-time falsy", 0) {
 }}),
 }]);
 
-//# sourceMappingURL=_377708._.js.map
+//# sourceMappingURL=_17fb5a._.js.map
